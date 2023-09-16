@@ -1,0 +1,60 @@
+<HTML>
+<TITLE>Using TraceWin</TITLE>
+
+<H2>Instructions for using TraceWin</H2>
+
+<H4>What is TraceWin?</H4>
+
+<blockquote>TraceWin is a Windows applet that displays C++ (TRACE, ATLTRACE,
+ _RPTX) and .NET (Trace.Write) diagnostics in a separate
+ window. You can use it to help debug your app without running it under the
+ debugger. You can also save the output to a file for later use.
+</blockquote>
+
+<H4>To use TraceWin in an MFC app:</H4>
+
+<UL>
+<LI><P>Copy the executable TraceWin.exe to a folder in your PATH.</LI>
+<LI><P>Copy TraceWin.h to a folder in your project or INCLUDE path.</LI>
+<LI><P>#include TraceWin.h in your main program file (eg. MyApp.cpp).<BR>
+	IMPORTANT: Only one module per project should include TraceWin.h!</LI>
+<LI><P>Compile your app with _DEBUG.</LI>
+</UL>
+
+<H4>To use TraceWin in a .NET app:</H4>
+
+<UL>
+<LI><P>Copy TraceWinListener.dll somewhere handy.</LI>
+<LI><P>Add a reference to TraceWinListener.dll in your .NET project.</LI>
+<LI><P>Add the following lines in your main module file (eg. Form1.cs):
+<PRE><FONT COLOR="#008080" face="Courier">using TraceWin;
+Debug.Listeners.Add(new TraceWinListener());</font></pre>
+</PRE>
+<P>Use equivalent lines for Visual Basic and other languages.
+</LI>
+<LI><P>Don't forget to compile your app with /d:TRACE !</LI>
+</UL>
+
+<H4>To see trace output:</H4>
+
+<UL>
+<LI><P>Run TraceWin.exe before starting your app.</LI>
+</UL>
+
+<H4>To build TraceWin.exe and TraceWinListener.dll:</H4>
+
+<blockquote><P>If all you want to do is use TraceWin, use the .exe and
+.dll provided. But if you want to modify either of these for whatever reason,
+or just see how they work, the source code is in src/cpp and src/cs. You
+	can open the solution files in Visual Studio .NET, or just open a command
+	prompt, cd to the appropriate folder and type:
+<PRE><FONT COLOR="#008080" face="Courier">nmake</font></pre></PRE>
+Make sure your PATH is set up to find Visual Studio .NET and NMAKE.
+
+<P><B>Happy Programming!<BR>
+Paul DiLascia<BR>
+<A HREF="http://www.dilascia.com">www.dilascia.com</A>
+</B>
+</blockquote>
+
+</HTML>
