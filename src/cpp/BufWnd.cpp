@@ -37,20 +37,20 @@ CBufWnd::~CBufWnd()
 //////////////////
 // Create a multiline edit control
 //
-BOOL CBufWnd::Create(CWnd* pParentWnd, UINT nID)
+bool CBufWnd::Create(CWnd* pParentWnd, UINT nID)
 {
 	CRect rect;
 	return CEdit::Create(
 		WS_VISIBLE | WS_CHILD | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE,
 		rect, 
 		pParentWnd, 
-		nID);
+		nID) == TRUE;
 }
 
 /////////////////
 // Helper returns TRUE of buffer is empty
 //
-BOOL CBufWnd::IsEmpty() 
+bool CBufWnd::IsEmpty() 
 {
 	return GetLineCount() <= 1 && LineLength() == 0;
 }

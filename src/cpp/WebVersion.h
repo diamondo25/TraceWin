@@ -19,14 +19,12 @@ protected:
 	DWORD	  m_dwError;						 // most recent error code
 	TCHAR   m_errInfo[256];					 // extended error info
 	char	  m_version[BUFSIZ];				 // version number as text
-	void    SaveErrorInfo();				 // helper to save error info
 
 public:
 	DWORD dwVersionMS;		// version number: most-sig 32 bits
 	DWORD dwVersionLS;		// version number: least-sig 32 bits
 
-	CWebVersion(LPCTSTR server) : m_lpServer(server) { }
-	~CWebVersion()	{ }
+	CWebVersion(LPCTSTR server) : m_lpServer(server), m_version{0}, m_errInfo{0}, m_dwError(0), dwVersionLS(0), dwVersionMS(0) { }
 
 	static  BOOL Online();
 	BOOL	  ReadVersion(LPCTSTR lpFileName);

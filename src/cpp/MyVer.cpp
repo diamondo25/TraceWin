@@ -30,5 +30,5 @@ CMyVersionInfo::CMyVersionInfo()
 	// copy fixed info to myself, which am derived from VS_FIXEDFILEINFO 
 	*(VS_FIXEDFILEINFO*)this = *(VS_FIXEDFILEINFO*)lpvi;
 
-	delete pVersionInfo;
+	delete[] pVersionInfo;
 }

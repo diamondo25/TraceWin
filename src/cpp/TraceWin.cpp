@@ -32,7 +32,7 @@ BEGIN_MESSAGE_MAP(CTraceWinApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
 END_MESSAGE_MAP()
 
-CTraceWinApp::CTraceWinApp()
+CTraceWinApp::CTraceWinApp() : m_dwNewVersion(0)
 {
 }
 

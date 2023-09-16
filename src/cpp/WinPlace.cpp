@@ -50,7 +50,7 @@ BOOL CWindowPlacement::GetProfileWP(LPCTSTR lpszKey, LPCTSTR lpszVal)
 		return FALSE;
 
 	// scanf is overkill, but I'm lazy
-	return _stscanf((LPCTSTR)s, FormatWP,
+	return _stscanf_s((LPCTSTR)s, FormatWP,
 		&showCmd,
 		&flags,
 		&ptMinPosition.x,

@@ -15,8 +15,8 @@ class CBufWnd : public CEdit {
 public:
 	CBufWnd();
 	virtual ~CBufWnd();
-	BOOL Create(CWnd* pParentWnd, UINT nID);
-	BOOL IsEmpty();
+	bool Create(CWnd* pParentWnd, UINT nID);
+	bool IsEmpty();
 protected:
 	afx_msg void OnEditClearAll();
 	afx_msg void OnEditCopy();

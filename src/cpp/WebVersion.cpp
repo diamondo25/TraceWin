@@ -49,7 +49,7 @@ BOOL CWebVersion::ReadVersion(LPCTSTR lpFileName)
 				if (nRead>0) {
 					m_version[nRead] = 0;
 					int Mhi,Mlo,mhi,mlo;
-					sscanf(m_version, "%x,%x,%x,%x", &Mhi, &Mlo, &mhi, &mlo);
+					sscanf_s(m_version, "%x,%x,%x,%x", &Mhi, &Mlo, &mhi, &mlo);
 					dwVersionMS = MAKELONG(Mlo,Mhi);
 					dwVersionLS = MAKELONG(mlo,mhi);
 					return TRUE;

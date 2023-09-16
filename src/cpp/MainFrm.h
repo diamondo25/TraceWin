@@ -23,11 +23,11 @@ class CMainFrame : public CFrameWnd {
 	CFile			m_file;				// if outputting to file
 	UINT			m_nOutputWhere;	// where to output
 	CFont			m_font;				// display font
-	BOOL			m_bRotateBuf;		// delete old stuff when full
+	bool			m_bRotateBuf;		// delete old stuff when full
 	UINT			m_nLimitText;		// max buffer text size
 
 	// Helpers
-	BOOL OpenFile(CFile& f, LPCTSTR lpszPathName);	// helper
+	bool OpenFile(CFile& f, LPCTSTR lpszPathName);	// helper
 	void CloseTraceFile();
 
 public:

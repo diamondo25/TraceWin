@@ -44,8 +44,9 @@ CMainFrame::CMainFrame()
 	m_nOutputWhere = ID_OUTPUT_TO_WINDOW;
 	CString dir  = AfxGetApp()->GetProfileString(REGKEY,_T("Directory"));
 	m_bRotateBuf = AfxGetApp()->GetProfileInt(REGKEY, _T("RotatingBuf"), 1);
+	m_nLimitText = 0;
 	if (!dir.IsEmpty())
-		_tchdir(dir);
+		UNUSED(_tchdir(dir));
 }
 
 CMainFrame::~CMainFrame()
@@ -141,7 +142,7 @@ LRESULT CMainFrame::OnTraceMsg(WPARAM wParam, LPARAM lParam)
 	LPCWSTR lpText=NULL;
 	UINT len = pcds->cbData;
 	UINT nchars = 0;
-	static TCHAR buf[1024];
+	static TCHAR buf[1024] = {0};
 
 	if (pcds->dwData==ID_COPYDATA_TRACEMSGW) {
 		lpText = (LPCWSTR)pcds->lpData;		 // already Unicode
@@ -171,7 +172,7 @@ LRESULT CMainFrame::OnTraceMsg(WPARAM wParam, LPARAM lParam)
 		// Convert \n to \n\r for Windows brain-damaged edit control
 		// It's 1995, and I'm still writing code like this!
 		//
-		WCHAR buf[1024];
+		WCHAR buf[1024] = {0};
 		WCHAR* endbuf = buf + sizeof(buf)/sizeof(buf[0]);
 		WCHAR* dst = buf;
 		LPCWSTR src = lpText;
@@ -219,7 +220,7 @@ void CMainFrame::OnFileSaveAs()
 		WCHAR buf[256];
 		int count = m_wndBuffer.GetLineCount();
 		for (int line=0; line<count; line++) {
-			int len = m_wndBuffer.GetLine(line, buf, sizeof(buf)-1);
+			int len = m_wndBuffer.GetLine(line, buf, ARRAYSIZE(buf)-2);
 			buf[len++]=_T('\n');
 			f.Write(buf, len);
 		}
@@ -230,7 +231,7 @@ void CMainFrame::OnFileSaveAs()
 //////////////////
 // Helper to open a file
 //
-BOOL CMainFrame::OpenFile(CFile& f, LPCWSTR lpszPathName)
+bool CMainFrame::OpenFile(CFile& f, LPCWSTR lpszPathName)
 {
 	BOOL bOpen = FALSE;
 	TRY {
@@ -245,7 +246,7 @@ BOOL CMainFrame::OpenFile(CFile& f, LPCWSTR lpszPathName)
 			_T("TRACEWIN"), MB_OK|MB_ICONEXCLAMATION);
 	}
 
-	return bOpen;
+	return bOpen == TRUE;
 }
 
 void CMainFrame::CloseTraceFile()
@@ -327,7 +328,7 @@ void CMainFrame::OnClose()
 		::GetWindowLong(m_hWnd, GWL_EXSTYLE) & WS_EX_TOPMOST ? TRUE : FALSE);
 
 	TCHAR buf[_MAX_PATH] = {0};
-	_tgetcwd(buf, _MAX_PATH);
+	UNUSED(_tgetcwd(buf, ARRAYSIZE(buf)));
 	pApp->WriteProfileString(REGKEY, _T("Directory"), buf);
 
 	CFontUI().WriteProfileFont(REGKEY, _T("Font"), m_font);

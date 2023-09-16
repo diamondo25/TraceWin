@@ -67,7 +67,7 @@ HBRUSH CStaticLink::CtlColor(CDC* pDC, UINT nCtlColor)
 		// this is a text control: set up font and colors
 		if (!(HFONT)m_font) {
 			// first time init: create font
-			LOGFONT lf;
+			LOGFONT lf = {0};
 			GetFont()->GetObject(sizeof(lf), &lf);
 			lf.lfUnderline = TRUE;
 			m_font.CreateFontIndirect(&lf);
@@ -94,7 +94,10 @@ void CStaticLink::OnLButtonUp(UINT nFlags, CPoint point)
 		GetWindowText(m_link);
 		if (!TryNavigate()) {
 			// try resource string
-			m_link.LoadString(GetDlgCtrlID());
+			if (!m_link.LoadString(GetDlgCtrlID())) {
+				TRACE(_T("Unable to load string from resource..."));
+				return;
+			}
 			if (!TryNavigate()) {
 				// unable to navigate link!
 				MessageBeep(0);

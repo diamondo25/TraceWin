@@ -121,8 +121,8 @@ BOOL CFontUI::GetProfileFont(LPCTSTR lpszKey, LPCTSTR lpszVal, CFont& font,
 	int iPtSize;
 
 	// scanf is overkill, but I'm lazy
-	if (_stscanf((LPCTSTR)s, _T("%[a-zA-Z ],%d,%d,%d"),
-		lf.lfFaceName, &iPtSize, &lf.lfWeight, &bItalic) != 4)
+	if (_stscanf_s((LPCTSTR)s, _T("%[a-zA-Z ],%d,%d,%d"),
+		lf.lfFaceName, _tcsclen(lf.lfFaceName), &iPtSize, &lf.lfWeight, &bItalic) != 4)
 		return FALSE;
 	lf.lfHeight = MulDiv(-iPtSize, 	// convert ptsize to logical units
 		::GetDeviceCaps(pDC ? pDC->m_hDC : ::GetDC(NULL), LOGPIXELSY), 72);
