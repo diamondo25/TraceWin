@@ -326,8 +326,8 @@ void CMainFrame::OnClose()
 	pApp->WriteProfileInt(REGKEY, _T("KeepOnTop"),  
 		::GetWindowLong(m_hWnd, GWL_EXSTYLE) & WS_EX_TOPMOST ? TRUE : FALSE);
 
-	WCHAR buf[_MAX_PATH];
-	_tgetcwd(buf, sizeof(buf));
+	TCHAR buf[_MAX_PATH] = {0};
+	_tgetcwd(buf, _MAX_PATH);
 	pApp->WriteProfileString(REGKEY, _T("Directory"), buf);
 
 	CFontUI().WriteProfileFont(REGKEY, _T("Font"), m_font);
